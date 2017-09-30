@@ -20,6 +20,13 @@ public:
 
 	virtual void BeginPlay() override;
 
+	virtual void SetupPlayerInputComponent(class UInputComponent*
+		PlayerInputComponent) override;
+
+	virtual void Tick(float DeltaSeconds) override;
+
+	void UpdateFlipbook();
+
 private:
 
 	UPROPERTY(EditAnywhere) class USpringArmComponent* CameraBoom;
@@ -27,5 +34,6 @@ private:
 	UPROPERTY(EditAnywhere) class UPaperFlipbook* MagoParado;
 	UPROPERTY(EditAnywhere) class UPaperFlipbook* MagoAndando;
 	
-	
+	void Move(float Value);
+
 };
