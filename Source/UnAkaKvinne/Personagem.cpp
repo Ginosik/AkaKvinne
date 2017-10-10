@@ -38,20 +38,16 @@ void APersonagem::SetupPlayerInputComponent(UInputComponent * PlayerInputCompone
 	PlayerInputComponent->BindAxis("Move", this, &APersonagem::Move);
 
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &APersonagem::Jump);
+
+	PlayerInputComponent->BindTouch(IE_Pressed, this, &APersonagem::TouchStarted);
+
+	PlayerInputComponent->BindTouch(IE_Released, this, &APersonagem::TouchStopped);
 }
 
 void APersonagem::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
-	if (GetVelocity().X > 0)
-	{
-		GetSprite()->SetWorldRotation(FRotator(0.0f, 0.0f, 0.0f));
-	}
-	else if (GetVelocity().X < 0)
-	{
-		GetSprite()->SetWorldRotation(FRotator(0.0f, 180.0f, 0.0f));
-	}
 	UpdateFlipbook();
 }
 
@@ -61,6 +57,14 @@ void APersonagem::UpdateFlipbook()
 	if (GetVelocity().X != 0)
 	{
 		GetSprite()->SetFlipbook(MagoAndando);
+		if (GetVelocity().X > 0) 
+		{
+			GetSprite()->SetWorldRotation(FRotator(0.0f, 0.0f, 0.0f));
+		}
+		else if (GetVelocity().X < 0)
+		{
+			GetSprite()->SetWorldRotation(FRotator(0.0f, 180.0f, 0.0f));
+		}
 	}
 	else
 	{
@@ -72,6 +76,20 @@ void APersonagem::UpdateFlipbook()
 void APersonagem::Move(float Value)
 {
 	AddMovementInput(FVector(1.0f, 0.0f, 0.0f), Value);
+}
+
+void APersonagem::TouchStarted(const ETouchIndex::Type FinderIndex, const FVector Location)
+{
+
+	Jump();
+
+}
+
+void APersonagem::TouchStopped(const ETouchIndex::Type FinderIndex, const FVector Location)
+{
+
+	StopJumping();
+
 }
 
 

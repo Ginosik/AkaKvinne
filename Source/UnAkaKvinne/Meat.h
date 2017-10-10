@@ -31,7 +31,7 @@ private:
 	UPROPERTY(EditAnywhere)
 		class UPaperFlipbookComponent* Sprite;
 
-	UPROPERTY(EditAnywhere)
+	UFUNCTION()
 		void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 	
 };

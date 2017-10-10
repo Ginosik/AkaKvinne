@@ -36,4 +36,10 @@ private:
 	
 	void Move(float Value);
 
+	void TouchStarted(const ETouchIndex::Type FinderIndex,
+		const FVector Location);
+
+	void TouchStopped(const ETouchIndex::Type FinderIndex,
+		const FVector Location);
+
 };
