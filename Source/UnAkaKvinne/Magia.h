@@ -4,16 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Cajado.generated.h"
+#include "Magia.generated.h"
 
 UCLASS()
-class UNAKAKVINNE_API ACajado : public AActor
+class UNAKAKVINNE_API AMagia : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ACajado();
+	AMagia();
 
 protected:
 	// Called when the game starts or when spawned
@@ -23,18 +23,6 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	virtual void StartFire();
-	virtual void StopFire();
-	virtual void DoFire();
-	void SetAmmoAmount(int NewAmount);
-	int	GetAmmoAmount();
-
-private:
-
-	UPROPERTY(EditAnywhere) int AmmoAmount;
-
-	UPROPERTY(EditAnywhere) class UPaperFlipbookComponent* Flipbook;
-
-	UPROPERTY(EditAnywhere) TSubclassOf<class AMagia> MagiaBP;
+	
 	
 };

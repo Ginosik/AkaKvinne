@@ -27,12 +27,17 @@ public:
 
 	void UpdateFlipbook();
 
+	void StartFire();
+
+	void StopFire();
+
 private:
 
 	UPROPERTY(EditAnywhere) class USpringArmComponent* CameraBoom;
 	UPROPERTY(EditAnywhere) class UCameraComponent* Camera;
 	UPROPERTY(EditAnywhere) class UPaperFlipbook* MagoParado;
 	UPROPERTY(EditAnywhere) class UPaperFlipbook* MagoAndando;
+	UPROPERTY(EditAnywhere) class UChildActorComponent* Cajado;
 	
 	void Move(float Value);
 

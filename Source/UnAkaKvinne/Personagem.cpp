@@ -8,6 +8,8 @@
 #include "GameFramework/Controller.h"
 #include "Camera/CameraComponent.h"
 #include "PaperFlipbookComponent.h"
+#include "Components/ChildActorcomponent.h"
+#include "Cajado.h"
 
 APersonagem::APersonagem()
 {
@@ -19,6 +21,9 @@ APersonagem::APersonagem()
 	Camera->ProjectionMode = ECameraProjectionMode::Orthographic;
 	Camera->OrthoWidth = 2048.0f;
 	Camera->SetupAttachment(CameraBoom);
+
+	Cajado = CreateDefaultSubobject <UChildActorComponent>(TEXT("Cajado"));
+	Cajado->SetupAttachment(GetSprite());
 
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
 }
@@ -38,6 +43,10 @@ void APersonagem::SetupPlayerInputComponent(UInputComponent * PlayerInputCompone
 	PlayerInputComponent->BindAxis("Move", this, &APersonagem::Move);
 
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &APersonagem::Jump);
+
+	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &APersonagem::StartFire);
+
+	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &APersonagem::StopFire);
 
 	PlayerInputComponent->BindTouch(IE_Pressed, this, &APersonagem::TouchStarted);
 
@@ -71,6 +80,30 @@ void APersonagem::UpdateFlipbook()
 		GetSprite()->SetFlipbook(MagoParado);
 	}
 
+}
+
+void APersonagem::StartFire()
+{
+	if (Cajado != nullptr)
+	{
+		if (Cajado->GetChildActor()->IsA(ACajado::StaticClass()))
+		{
+			ACajado* CajadoCast = Cast<ACajado>(Cajado->GetChildActor());
+			CajadoCast->StartFire();
+		}
+	}
+}
+
+void APersonagem::StopFire()
+{
+	if (Cajado != nullptr)
+	{
+		if (Cajado->GetChildActor()->IsA(ACajado::StaticClass()))
+		{
+			ACajado* CajadoCast = Cast<ACajado>(Cajado->GetChildActor());
+			CajadoCast->StopFire();
+		}
+	}
 }
 
 void APersonagem::Move(float Value)
