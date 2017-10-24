@@ -101,7 +101,7 @@ void APersonagem::StopFire()
 		if (Cajado->GetChildActor()->IsA(ACajado::StaticClass()))
 		{
 			ACajado* CajadoCast = Cast<ACajado>(Cajado->GetChildActor());
-			CajadoCast->StopFire();
+			CajadoCast->StopFire();	
 		}
 	}
 }

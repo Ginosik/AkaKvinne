@@ -23,6 +23,10 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	
+private:
+
+	UPROPERTY(EditAnywhere) class UProjectileMovementComponent* ProjectileMovement;
+	UPROPERTY(EditAnywhere) class UPaperFlipbookComponent* Flipbook;
+	UPROPERTY(EditAnywhere) class UBoxComponent* CollisionComp;
 	
 };

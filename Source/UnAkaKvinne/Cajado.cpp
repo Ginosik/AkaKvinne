@@ -23,34 +23,50 @@ ACajado::ACajado()
 void ACajado::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	AmmoAmount = 20;
 }
 
 // Called every frame
 void ACajado::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	
 }
 
 void ACajado::StartFire()
 {
+	UE_LOG(LogTemp, Warning, TEXT("START FIRE"));
+	DoFire();
 }
 
 void ACajado::StopFire()
 {
+	UE_LOG(LogTemp, Warning, TEXT("STOP FIRE"));
 }
 
 void ACajado::DoFire()
 {
+	if (AmmoAmount > 0)
+	{
+		UWorld* World = GetWorld();
+		if (World != nullptr)
+		{
+			FActorSpawnParameters SpawnParam;
+			AMagia* Magia = World->SpawnActor <AMagia>(MagiaBP, RootComponent->GetComponentLocation(), FRotator::ZeroRotator, SpawnParam);
+			AmmoAmount--;
+		}
+	}
+	UE_LOG(LogTemp, Warning, TEXT("DO FIRE"));
 }
 
 void ACajado::SetAmmoAmount(int NewAmount)
 {
+	AmmoAmount = NewAmount;
 }
 
 int ACajado::GetAmmoAmount()
 {
-	return 0;
+	return AmmoAmount;
 }
 
